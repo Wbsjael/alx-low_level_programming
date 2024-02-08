@@ -1,22 +1,22 @@
 #include "main.h"
 
 /**
- * clear_bit -sets the value of a bit to 0 at a given index
+ * flip_bits - returns number of bits needed to flip from one number to another
  * @n: the giving number
- * @index: the index starting from 0 of the bit you want to set
+ * @m: second number
  *
- * Return: 1 if it works or -1 if error occurs
+ * Return: number of bits needed to flip
  */
-int clear_bit(unsigned long int *n, unsigned int index)
+unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	/* checking if index is within range of the bits */
-	if (index >= sizeof(unsigned long int) * 8)
+	unsigned long int bits = n ^ m;
+	unsigned int c = 0;
+
+	/* calculating the XOR of the two numbers to get the bits that are diff */
+	while (bits != 0)
 	{
-		return (-1);
+		c += bits & 1;
+		bits >>= 1;
 	}
-	/* using and operator to clear the bit at index to 0 */
-	*n &= ~(1UL << index);
-	{
-		return (1);
-	}
+	return (c);
 }
